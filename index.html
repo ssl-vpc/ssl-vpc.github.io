@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">egin.cc</title>
+<link rel="icon" type="image/png" href="images/favicon_64px.png" sizes="64x64">
+<link rel="icon" type="image/png" href="images/favicon_32px.png" sizes="32x32">
+<link rel="icon" type="image/png" href="images/favicon_16px.png" sizes="16x16">
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+<link type="text/css" rel="stylesheet" media="screen and (max-width: 800px)" href="css/stylesheetU800px.css">
+</head>
+
+<body>
+<div id="enterWired"></div>
+
+<div class="article">
+  <div class="iconA"></div>
+  <h1>About</h1>
+  <h5 class="author">-egin / vpc<br></h5>
+  <h5 class="date" id="dateAbout">11.25.25</h5>
+  <br>
+  <br>
+  <hr>
+  <br><br>
+  <p>Two perspectives, one space.</p>
+  <br>
+  <a href="vpc.html">vpc</a> ︱ <a href="egin.html">egin</a>
+  <br><br>
+  <img src="images/2.gif" alt="floating screen">
+  <br><br><br>
+</div>
+
+<script>
+function updateDates() {
+  const now = new Date();
+  const options = { timeZone: 'Europe/Brussels', year: 'numeric', month: '2-digit', day: '2-digit' };
+  const formatter = new Intl.DateTimeFormat('en-US', options);
+  const parts = formatter.formatToParts(now);
+  
+  const month = parts.find(p => p.type === 'month').value;
+  const day = parts.find(p => p.type === 'day').value;
+  const year = parts.find(p => p.type === 'year').value.slice(-2);
+  const dateStr = month + '.' + day + '.' + year;
+  
+  const dateElements = document.querySelectorAll('.date');
+  dateElements.forEach(function(el) {
+    el.textContent = dateStr;
+  });
+}
+
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+const originalTitle = 'egin.cc';
+let titleElement = document.getElementById('pageTitle');
+
+function glitchTitle() {
+  let glitched = '';
+  for (let i = 0; i < originalTitle.length; i++) {
+    if (Math.random() > 0.7) {
+      glitched += chars[Math.floor(Math.random() * chars.length)];
+    } else {
+      glitched += originalTitle[i];
+    }
+  }
+  if (titleElement) {
+    titleElement.textContent = glitched;
+  }
+  document.title = glitched;
+}
+
+updateDates();
+setInterval(glitchTitle, 100);
+</script>
+
+<div id="musicPlayer" class="hidden">
+  <div class="player-header">
+    <span class="player-title">⌈ PLAYER ⌋</span>
+    <span class="close-btn" id="closePlayer">×</span>
+  </div>
+  <div class="player-controls">
+    <button class="player-btn" id="playBtn">PLAY</button>
+    <button class="player-btn" id="pauseBtn">PAUSE</button>
+  </div>
+  <div class="volume-control">
+    <span>VOL:</span>
+    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+    <span id="volumeValue">50%</span>
+  </div>
+  <div class="track-select">
+    <label>TRACK:</label>
+    <select id="trackSelect">
+      <option value="media/music.mp3">music.mp3</option>
+      <option value="media/audio.mp3">audio.mp3</option>
+    </select>
+  </div>
+  <div class="now-playing" id="nowPlaying">♫ music.mp3</div>
+</div>
+<button id="playerToggle">♫ SHOW PLAYER</button>
+
+<audio id="audioPlayer" autoplay loop>
+  <source src="media/music.mp3" type="audio/mpeg">
+</audio>
+
+<link rel="stylesheet" type="text/css" href="css/player.css">
+<script src="js/player.js"></script>
+
+</body>
+</html>
