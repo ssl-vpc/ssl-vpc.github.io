@@ -1,4 +1,4 @@
-// Music Player Controller
+
 document.addEventListener('DOMContentLoaded', function() {
   const audio = document.getElementById('audioPlayer');
   const player = document.getElementById('musicPlayer');
@@ -11,13 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const closeBtn = document.getElementById('closePlayer');
   const nowPlaying = document.getElementById('nowPlaying');
 
-  // Check if all elements exist
   if (!audio || !player || !toggle || !playBtn || !pauseBtn || !volumeSlider || !volumeValue || !trackSelect || !closeBtn || !nowPlaying) {
     console.error('Music player elements not found');
     return;
   }
 
-  // Make player draggable with smooth animation
   let isDragging = false;
   let currentX = 0;
   let currentY = 0;
@@ -35,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('mousemove', drag, { passive: false });
   document.addEventListener('mouseup', dragEnd);
 
-  // Touch events for mobile
   playerHeader.addEventListener('touchstart', dragStart, { passive: false });
   document.addEventListener('touchmove', drag, { passive: false });
   document.addEventListener('touchend', dragEnd);
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     if (e.target === playerHeader || playerHeader.contains(e.target)) {
-      // Don't start drag if clicking close button
       if (e.target === closeBtn || closeBtn.contains(e.target)) {
         return;
       }
@@ -74,7 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
       xOffset = currentX;
       yOffset = currentY;
 
-      // Use requestAnimationFrame for smooth animation
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
@@ -106,7 +101,6 @@ document.addEventListener('DOMContentLoaded', function() {
     el.style.transform = 'translate3d(' + xPos + 'px, ' + yPos + 'px, 0)';
   }
 
-  // Restore player position
   try {
     const savedX = sessionStorage.getItem('playerX');
     const savedY = sessionStorage.getItem('playerY');
@@ -122,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Could not restore player position');
   }
 
-  // Toggle player visibility
   toggle.addEventListener('click', function(e) {
     e.preventDefault();
     player.classList.toggle('hidden');
@@ -133,14 +126,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Close button
   closeBtn.addEventListener('click', function(e) {
     e.preventDefault();
     player.classList.add('hidden');
     toggle.textContent = '♫ SHOW PLAYER';
   });
 
-  // Play button
   playBtn.addEventListener('click', function(e) {
     e.preventDefault();
     audio.play().catch(function(error) {
@@ -148,20 +139,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Pause button
   pauseBtn.addEventListener('click', function(e) {
     e.preventDefault();
     audio.pause();
   });
 
-  // Volume control
   volumeSlider.addEventListener('input', function() {
     const volume = parseFloat(this.value) / 100;
     audio.volume = Math.max(0, Math.min(1, volume));
     volumeValue.textContent = this.value + '%';
   });
 
-  // Track selection
   trackSelect.addEventListener('change', function() {
     const selectedTrack = this.value;
     const wasPlaying = !audio.paused;
@@ -178,13 +166,11 @@ document.addEventListener('DOMContentLoaded', function() {
     updateNowPlaying();
   });
 
-  // Update now playing text
   function updateNowPlaying() {
     const trackName = trackSelect.options[trackSelect.selectedIndex].text;
     nowPlaying.textContent = '♫ ' + trackName;
   }
 
-  // Save state continuously
   function savePlayerState() {
     try {
       sessionStorage.setItem('audioTime', audio.currentTime);
@@ -198,18 +184,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Save state every second and on important events
   setInterval(savePlayerState, 1000);
   
   audio.addEventListener('play', savePlayerState);
   audio.addEventListener('pause', savePlayerState);
   audio.addEventListener('volumechange', savePlayerState);
   
-  // Save state before page unload
   window.addEventListener('beforeunload', savePlayerState);
   window.addEventListener('pagehide', savePlayerState);
 
-  // Restore complete player state
   try {
     const savedTime = sessionStorage.getItem('audioTime');
     const savedSrc = sessionStorage.getItem('audioSrc');
@@ -218,7 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const wasVisible = sessionStorage.getItem('playerVisible') === 'true';
     const savedTrack = sessionStorage.getItem('selectedTrack');
     
-    // Restore volume
     if (savedVolume) {
       audio.volume = parseFloat(savedVolume);
       volumeSlider.value = Math.round(parseFloat(savedVolume) * 100);
@@ -229,18 +211,15 @@ document.addEventListener('DOMContentLoaded', function() {
       volumeValue.textContent = '50%';
     }
     
-    // Restore track selection
     if (savedTrack) {
       trackSelect.value = savedTrack;
       audio.src = savedTrack;
     }
     
-    // Restore playback position
     if (savedTime && parseFloat(savedTime) > 0) {
       audio.currentTime = parseFloat(savedTime);
     }
     
-    // Restore player visibility
     if (wasVisible) {
       player.classList.remove('hidden');
       toggle.textContent = '♫ HIDE PLAYER';
@@ -249,10 +228,8 @@ document.addEventListener('DOMContentLoaded', function() {
       toggle.textContent = '♫ SHOW PLAYER';
     }
     
-    // Update now playing
     updateNowPlaying();
     
-    // Restore playing state
     if (wasPlaying) {
       setTimeout(function() {
         audio.play().catch(function() {
@@ -263,13 +240,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
   } catch(e) {
     console.log('Could not restore player state');
-    // Initialize defaults
     audio.volume = 0.5;
     volumeSlider.value = 50;
     volumeValue.textContent = '50%';
     updateNowPlaying();
     
-    // Try autoplay
     setTimeout(function() {
       audio.play().catch(function() {
         console.log('Autoplay prevented by browser');
@@ -277,3 +252,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
   }
 });
+
