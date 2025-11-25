@@ -1,1 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #0a0a0a;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .main_wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30em;
+            height: 30em;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5em;
+        }
+
+        .antenna {
+            width: 5em;
+            height: 5em;
+            border-radius: 50%;
+            border: 2px solid #333;
+            background-color: #8B4513;
+            margin-bottom: -6em;
+            margin-left: 0em;
+            z-index: -1;
+        }
+        .antenna_shadow {
+            position: absolute;
+            background-color: transparent;
+            width: 50px;
+            height: 56px;
+            margin-left: 1.68em;
+            border-radius: 45%;
+            transform: rotate(140deg);
+            border: 4px solid transparent;
+            box-shadow: inset 0px 16px #5D2906, inset 0px 16px 1px 1px #5D2906;
+            -moz-box-shadow: inset 0px 16px #5D2906, inset 0px 16px 1px 1px #5D2906;
+        }
+        .antenna::after {
+            content: "";
+            position: absolute;
+            margin-top: -9.4em;
+            margin-left: 0.4em;
+            transform: rotate(-25deg);
+            width: 1em;
+            height: 0.5em;
+            border-radius: 50%;
+            background-color: #A0522D;
+        }
+        .antenna::before {
+            content: "";
+            position: absolute;
+            margin-top: 0.2em;
+            margin-left: 1.25em;
+            transform: rotate(-20deg);
+            width: 1.5em;
+            height: 0.8em;
+            border-radius: 50%;
+            background-color: #A0522D;
+        }
+        .a1 {
+            position: relative;
+            top: -102%;
+            left: -130%;
+            width: 12em;
+            height: 5.5em;
+            border-radius: 50px;
+            background-image: linear-gradient(#0a0a0a, #0a0a0a, #2a2a2a, #2a2a2a, #0a0a0a);
+            transform: rotate(-29deg);
+            clip-path: polygon(50% 0%, 49% 100%, 52% 100%);
+        }
+        .a1d {
+            position: relative;
+            top: -211%;
+            left: -35%;
+            transform: rotate(45deg);
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 50%;
+            border: 2px solid #333;
+            background-color: #555;
+            z-index: 99;
+        }
+        .a2 {
+            position: relative;
+            top: -210%;
+            left: -10%;
+            width: 12em;
+            height: 4em;
+            border-radius: 50px;
+            background-color: #0a0a0a;
+            background-image: linear-gradient(#0a0a0a, #0a0a0a, #2a2a2a, #2a2a2a, #0a0a0a);
+            margin-right: 5em;
+            clip-path: polygon(47% 0, 47% 0, 34% 34%, 54% 25%, 32% 100%, 29% 96%, 49% 32%, 30% 38%);
+            transform: rotate(-8deg);
+        }
+        .a2d {
+            position: relative;
+            top: -294%;
+            left: 94%;
+            width: 0.5em;
+            height: 0.5em;
+            border-radius: 50%;
+            border: 2px solid #333;
+            background-color: #555;
+            z-index: 99;
+        }
+
+        .notfound_text {
+            background-color: #111;
+            padding-left: 0.3em;
+            padding-right: 0.3em;
+            font-size: 0.75em;
+            color: #ff4444;
+            letter-spacing: 0;
+            border-radius: 5px;
+            z-index: 10;
+            font-weight: bold;
+            text-shadow: 0 0 10px #ff0000;
+        }
+        .tv {
+            width: 17em;
+            height: 9em;
+            margin-top: 3em;
+            border-radius: 15px;
+            background-color: #2B1B0A;
+            display: flex;
+            justify-content: center;
+            border: 2px solid #1a0a00;
+            box-shadow: inset 0.2em 0.2em #5D2906;
+        }
+        .tv::after {
+            content: "";
+            position: absolute;
+            width: 17em;
+            height: 9em;
+            border-radius: 15px;
+            background: repeating-radial-gradient(#2B1B0A 0 0.0001%, #00000070 0 0.0002%) 50% 0/2500px 2500px, repeating-conic-gradient(#2B1B0A 0 0.0001%, #00000070 0 0.0002%) 60% 60%/2500px 2500px;
+            background-blend-mode: difference;
+            opacity: 0.09;
+        }
+        .curve_svg {
+            position: absolute;
+            margin-top: 0.25em;
+            margin-left: -0.25em;
+            height: 12px;
+            width: 12px;
+        }
+        .display_div {
+            display: flex;
+            align-items: center;
+            align-self: center;
+            justify-content: center;
+            border-radius: 15px;
+            box-shadow: 3.5px 3.5px 0px #5D2906;
+        }
+        .screen_out {
+            width: auto;
+            height: auto;
+            border-radius: 10px;
+        }
+        .screen_out1 {
+            width: 11em;
+            height: 7.75em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        .screen {
+            width: 13em;
+            height: 7.85em;
+            font-family: 'Courier New', monospace;
+            border: 2px solid #1a0a00;
+            background: repeating-radial-gradient(#000 0 0.0001%, #1a1a1a 0 0.0002%) 50% 0/2500px 2500px, repeating-conic-gradient(#000 0 0.0001%, #1a1a1a 0 0.0002%) 60% 60%/2500px 2500px;
+            background-blend-mode: difference;
+            animation: b 0.2s infinite alternate;
+            border-radius: 10px;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ff4444;
+            letter-spacing: 0.15em;
+            text-align: center;
+            text-shadow: 0 0 5px #ff0000;
+        }
+
+        .screenM {
+            width: 13em;
+            height: 7.85em;
+            position: relative;
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(to right, 
+                #001122 0%, #001933 14.2857142857%, 
+                #1a1a1a 14.2857142857%, #111111 28.5714285714%, 
+                #330011 28.5714285714%, #2a000d 42.8571428571%, 
+                #2a2a2a 42.8571428571%, #222222 57.1428571429%, 
+                #003322 57.1428571429%, #002a1a 71.4285714286%, 
+                #1a1a1a 71.4285714286%, #111111 85.7142857143%, 
+                #002233 85.7142857143%, #001922 100%);
+            border-radius: 10px;
+            border: 2px solid #000;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #ff4444;
+            letter-spacing: 0.15em;
+            text-align: center;
+            overflow: hidden;
+            text-shadow: 0 0 5px #ff0000;
+        }
+        .screenM:before, .screenM:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+        }
+        .screenM:before {
+            top: 0;
+            height: 68.4782608696%;
+            background: linear-gradient(to right, 
+                #001122 0%, #001933 14.2857142857%, 
+                #330011 14.2857142857%, #2a000d 28.5714285714%, 
+                #003322 28.5714285714%, #002a1a 42.8571428571%, 
+                #113300 42.8571428571%, #0d2a00 57.1428571429%, 
+                #330033 57.1428571429%, #2a002a 71.4285714286%, 
+                #330000 71.4285714286%, #2a0000 85.7142857143%, 
+                #000033 85.7142857143%, #00002a 100%);
+        }
+        .screenM:after {
+            bottom: 0;
+            height: 21.7391304348%;
+            background: linear-gradient(to right, 
+                #002222 0%, #001a1a 16.6666666667%, 
+                #001122 16.6666666667%, #001933 33.3333333333%, 
+                #000033 33.3333333333%, #00002a 50%, 
+                #2a2a2a 50%, #222222 66.6666666667%, 
+                #1a1a1a 66.6666666667%, #111111 83.3333333333%, 
+                #0a0a0a 83.3333333333%, #050505 100%);
+        }
+
+        @keyframes b {
+            100% {
+                background-position: 50% 0, 60% 50%;
+            }
+        }
+
+        .lines {
+            display: flex;
+            column-gap: 0.1em;
+            align-self: flex-end;
+        }
+        .line1, .line3 {
+            width: 2px;
+            height: 0.5em;
+            background-color: #333;
+            border-radius: 25px 25px 0px 0px;
+            margin-top: 0.5em;
+        }
+        .line2 {
+            flex-grow: 1;
+            width: 2px;
+            height: 1em;
+            background-color: #333;
+            border-radius: 25px 25px 0px 0px;
+        }
+
+        .buttons_div {
+            width: 4.25em;
+            align-self: center;
+            height: 8em;
+            background-color: #5D2906;
+            border: 2px solid #1a0a00;
+            padding: 0.6em;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            row-gap: 0.75em;
+            box-shadow: 3px 3px 0px #5D2906;
+        }
+        .b1 {
+            width: 1.65em;
+            height: 1.65em;
+            border-radius: 50%;
+            background-color: #3A1B04;
+            border: 2px solid #000;
+            box-shadow: inset 2px 2px 1px #7A4B26, -2px 0px #2A1503, -2px 0px 0px 1px #000;
+        }
+        .b1::before {
+            content: "";
+            position: absolute;
+            margin-top: 1em;
+            margin-left: 0.5em;
+            transform: rotate(47deg);
+            border-radius: 5px;
+            width: 0.1em;
+            height: 0.4em;
+            background-color: #000000;
+        }
+        .b1::after {
+            content: "";
+            position: absolute;
+            margin-top: 0.9em;
+            margin-left: 0.8em;
+            transform: rotate(47deg);
+            border-radius: 5px;
+            width: 0.1em;
+            height: 0.55em;
+            background-color: #000000;
+        }
+        .b1 div {
+            content: "";
+            position: absolute;
+            margin-top: -0.1em;
+            margin-left: 0.65em;
+            transform: rotate(45deg);
+            width: 0.15em;
+            height: 1.5em;
+            background-color: #000000;
+        }
+        .b2 {
+            width: 1.65em;
+            height: 1.65em;
+            border-radius: 50%;
+            background-color: #3A1B04;
+            border: 2px solid #000;
+            box-shadow: inset 2px 2px 1px #7A4B26, -2px 0px #2A1503, -2px 0px 0px 1px #000;
+        }
+        .b2::before {
+            content: "";
+            position: absolute;
+            margin-top: 1.05em;
+            margin-left: 0.8em;
+            transform: rotate(-45deg);
+            border-radius: 5px;
+            width: 0.15em;
+            height: 0.4em;
+            background-color: #000000;
+        }
+        .b2::after {
+            content: "";
+            position: absolute;
+            margin-top: -0.1em;
+            margin-left: 0.65em;
+            transform: rotate(-45deg);
+            width: 0.15em;
+            height: 1.5em;
+            background-color: #000000;
+        }
+        .speakers {
+            display: flex;
+            flex-direction: column;
+            row-gap: 0.5em;
+        }
+        .speakers .g1 {
+            display: flex;
+            column-gap: 0.25em;
+        }
+        .speakers .g1 .g11, .g12, .g13 {
+            width: 0.65em;
+            height: 0.65em;
+            border-radius: 50%;
+            background-color: #3A1B04;
+            border: 2px solid #000;
+            box-shadow: inset 1.25px 1.25px 1px #7A4B26;
+        }
+        .speakers .g {
+            width: auto;
+            height: 2px;
+            background-color: #0a0a0a;
+        }
+
+        .bottom {
+            width: 100%;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            column-gap: 8.7em;
+        }
+        .base1 {
+            height: 1em;
+            width: 2em;
+            border: 2px solid #0a0a0a;
+            background-color: #2a2a2a;
+            margin-top: -0.15em;
+            z-index: -1;
+        }
+        .base2 {
+            height: 1em;
+            width: 2em;
+            border: 2px solid #0a0a0a;
+            background-color: #2a2a2a;
+            margin-top: -0.15em;
+            z-index: -1;
+        }
+        .base3 {
+            position: absolute;
+            height: 0.15em;
+            width: 17.5em;
+            background-color: #0a0a0a;
+            margin-top: 0.8em;
+        }
+
+        .text_404 {
+            position: absolute;
+            display: flex;
+            flex-direction: row;
+            column-gap: 6em;
+            z-index: -5;
+            margin-bottom: 2em;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.1;
+            font-family: 'Courier New', monospace;
+            color: #ff4444;
+        }
+        .text_4041, .text_4042, .text_4043 {
+            transform: scaleY(24.5) scaleX(9);
+            text-shadow: 0 0 20px #ff0000;
+        }
+
+        .terminal-title {
+            color: #ccc;
+        }
+
+        .control {
+            background-color: #555;
+        }
+
+        .control.close {
+            background-color: #c33;
+        }
+
+        .control.minimize {
+            background-color: #cc0;
+        }
+
+        .control.maximize {
+            background-color: #0a0;
+        }
+
+        @media only screen and (max-width: 495px) {
+            .text_404 {
+                column-gap: 6em;
+            }
+        }
+        @media only screen and (max-width: 395px) {
+            .text_404 {
+                column-gap: 4em;
+            }
+            .text_4041, .text_4042, .text_4043 {
+                transform: scaleY(25) scaleX(8);
+            }
+        }
+
+        @media (max-width: 275px), (max-height: 520px) {
+            .main {
+                position: relative;
+            }
+        }
+
+        @media only screen and (max-width: 1024px) {
+            .screenM {
+                display: flex;
+            }
+            .screen {
+                display: none;
+            }
+        }
+        @media only screen and (min-width: 1025px) {
+            .screen {
+                display: flex;
+            }
+            .screenM {
+                display: none;
+            }
+        }
+
+        .error-message {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main_wrapper">
+        <div class="main">
+            <div class="antenna">
+                <div class="antenna_shadow"></div>
+                <div class="a1"></div>
+                <div class="a1d"></div>
+                <div class="a2"></div>
+                <div class="a2d"></div>
+                <div class="a_base"></div>
+            </div>
+            <div class="tv">
+                <div class="cruve">
+                    <svg class="curve_svg" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 189.929 189.929" xml:space="preserve">
+                        <path d="M70.343,70.343c-30.554,30.553-44.806,72.7-39.102,115.635l-29.738,3.951C-5.442,137.659,11.917,86.34,49.129,49.13 C86.34,11.918,137.664-5.445,189.928,1.502l-3.95,29.738C143.041,25.54,100.895,39.789,70.343,70.343z" 
+                              fill="#2B1B0A"></path>
+                    </svg>
+                </div>
+                <div class="display_div">
+                    <div class="screen_out">
+                        <div class="screen_out1">
+                            <div class="screen">
+                                <span class="notfound_text"> NOT FOUND</span>
+                            </div>
+                            <div class="screenM">
+                                <span class="notfound_text"> NOT FOUND</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lines">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+                <div class="buttons_div">
+                    <div class="b1"><div></div></div>
+                    <div class="b2"></div>
+                    <div class="speakers">
+                        <div class="g1">
+                            <div class="g11"></div>
+                            <div class="g12"></div>
+                            <div class="g13"></div>
+                        </div>
+                        <div class="g"></div>
+                        <div class="g"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="base1"></div>
+                <div class="base2"></div>
+                <div class="base3"></div>
+            </div>
+        </div>
+        <div class="text_404">
+            <div class="text_4041">4</div>
+            <div class="text_4042">0</div>
+            <div class="text_4043">4</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('mousemove', function(e) {
+            const tv = document.querySelector('.tv');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            tv.style.transform = `perspective(1000px) rotateY(${x * 5 - 2.5}deg) rotateX(${y * -5 + 2.5}deg)`;
+        });
+
+        document.addEventListener('mouseleave', function() {
+            const tv = document.querySelector('.tv');
+            tv.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+        });
+    </script>
+</body>
+</html>
