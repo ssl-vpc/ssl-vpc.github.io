@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">rest - egin.cc</title>
+<link rel="icon" type="image/png" href="images/favicon_64px.png" sizes="64x64">
+<link rel="icon" type="image/png" href="images/favicon_32px.png" sizes="32x32">
+<link rel="icon" type="image/png" href="images/favicon_16px.png" sizes="16x16">
+<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+<link type="text/css" rel="stylesheet" media="screen and (max-width: 800px)" href="css/stylesheetU800px.css">
+<link rel="stylesheet" type="text/css" href="css/glitch-bg.css">
+<script src="js/glitch-bg.js"></script>
+</head>
+
+<body>
+<a href="index.html">
+<div id="enterWired"></div>
+</a>
+
+<div class="article">
+  <div class="iconA"></div>
+  <h1>Links</h1>
+  <h5 class="author">-rest<br></h5>
+  <h5 class="date" id="dateRest">11.25.25</h5>
+  <br>
+  <br>
+  <hr>
+  <br><br>
+  <p><a href="https://www.roblox.com/users/7698774923/profile" target="_blank">Roblox</a> ︱ <a href="https://discord.com/users/1440443630027280456" target="_blank">Discord</a></p>
+  <br><br>
+  <p><a href="index.html">[Return Home]</a></p>
+  <br><br><br>
+</div>
+
+<div class="article">
+  <div class="iconA"></div>
+  <h1>About</h1>
+  <h5 class="author">-rest<br></h5>
+  <h5 class="date">11.25.25</h5>
+  <br>
+  <br>
+  <hr>
+  <br><br>
+  <p>aliases i own: K$ ︱ bow ︱ rest ︱ im 16</p>
+  <br>
+  <p>i love my girl: jenna</p>
+  <br>
+  <p>i play val csgo and games like that</p>
+  <br>
+  <p>My hbs: 556093 ︱ vpc ︱ deniz ︱ rifle ︱ virus764 ︱ vicious (og homie)</p>
+  <br><br>
+  <img src="images/1.gif" alt="rest">
+  <br><br><br>
+</div>
+
+<script>
+function updateDates() {
+  const now = new Date();
+  const options = { timeZone: 'Europe/Brussels', year: 'numeric', month: '2-digit', day: '2-digit' };
+  const formatter = new Intl.DateTimeFormat('en-US', options);
+  const parts = formatter.formatToParts(now);
+  
+  const month = parts.find(p => p.type === 'month').value;
+  const day = parts.find(p => p.type === 'day').value;
+  const year = parts.find(p => p.type === 'year').value.slice(-2);
+  const dateStr = month + '.' + day + '.' + year;
+  
+  const dateElements = document.querySelectorAll('.date');
+  dateElements.forEach(function(el) {
+    el.textContent = dateStr;
+  });
+}
+
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+const originalTitle = 'rest - egin.cc';
+
+function glitchTitle() {
+  let glitched = '';
+  for (let i = 0; i < originalTitle.length; i++) {
+    if (Math.random() > 0.7) {
+      glitched += chars[Math.floor(Math.random() * chars.length)];
+    } else {
+      glitched += originalTitle[i];
+    }
+  }
+  document.title = glitched;
+}
+
+updateDates();
+setInterval(glitchTitle, 100);
+</script>
+
+<div id="musicPlayer" class="hidden">
+  <div class="player-header">
+    <span class="player-title">⌈ PLAYER ⌋</span>
+    <span class="close-btn" id="closePlayer">×</span>
+  </div>
+  <div class="player-controls">
+    <button class="player-btn" id="playBtn">PLAY</button>
+    <button class="player-btn" id="pauseBtn">PAUSE</button>
+  </div>
+  <div class="volume-control">
+    <span>VOL:</span>
+    <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="50">
+    <span id="volumeValue">50%</span>
+  </div>
+  <div class="track-select">
+    <label>TRACK:</label>
+    <select id="trackSelect">
+      <option value="media/its_over.mp3">its_over.mp3</option>
+      <option value="media/germany.mp3">germany.mp3</option>
+    </select>
+  </div>
+  <div class="now-playing" id="nowPlaying">♫ its_over.mp3</div>
+</div>
+<button id="playerToggle">♫ SHOW PLAYER</button>
+
+<audio id="audioPlayer" autoplay loop>
+  <source src="media/its_over.mp3" type="audio/mpeg">
+</audio>
+
+<link rel="stylesheet" type="text/css" href="css/player.css">
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const audio = document.getElementById('audioPlayer');
+  const player = document.getElementById('musicPlayer');
+  const toggle = document.getElementById('playerToggle');
+  const playBtn = document.getElementById('playBtn');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const volumeSlider = document.getElementById('volumeSlider');
+  const volumeValue = document.getElementById('volumeValue');
+  const closeBtn = document.getElementById('closePlayer');
+  const trackSelect = document.getElementById('trackSelect');
+  const nowPlaying = document.getElementById('nowPlaying');
+
+  let isDragging = false;
+  let currentX = 0;
+  let currentY = 0;
+  let initialX = 0;
+  let initialY = 0;
+  let xOffset = 0;
+  let yOffset = 0;
+
+  const playerHeader = player.querySelector('.player-header');
+  playerHeader.style.cursor = 'move';
+
+  playerHeader.addEventListener('mousedown', dragStart);
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('mouseup', dragEnd);
+
+  playerHeader.addEventListener('touchstart', dragStart);
+  document.addEventListener('touchmove', drag);
+  document.addEventListener('touchend', dragEnd);
+
+  function dragStart(e) {
+    if (e.type === 'touchstart') {
+      initialX = e.touches[0].clientX - xOffset;
+      initialY = e.touches[0].clientY - yOffset;
+    } else {
+      initialX = e.clientX - xOffset;
+      initialY = e.clientY - yOffset;
+    }
+
+    if (e.target === playerHeader || playerHeader.contains(e.target)) {
+      if (e.target === closeBtn || closeBtn.contains(e.target)) return;
+      isDragging = true;
+    }
+  }
+
+  function drag(e) {
+    if (isDragging) {
+      e.preventDefault();
+      if (e.type === 'touchmove') {
+        currentX = e.touches[0].clientX - initialX;
+        currentY = e.touches[0].clientY - initialY;
+      } else {
+        currentX = e.clientX - initialX;
+        currentY = e.clientY - initialY;
+      }
+      xOffset = currentX;
+      yOffset = currentY;
+      player.style.transform = 'translate3d(' + currentX + 'px, ' + currentY + 'px, 0)';
+    }
+  }
+
+  function dragEnd() {
+    initialX = currentX;
+    initialY = currentY;
+    isDragging = false;
+  }
+
+  audio.volume = 0.5;
+
+  playBtn.addEventListener('click', function() {
+    audio.play();
+  });
+
+  pauseBtn.addEventListener('click', function() {
+    audio.pause();
+  });
+
+  volumeSlider.addEventListener('input', function() {
+    audio.volume = this.value / 100;
+    volumeValue.textContent = this.value + '%';
+  });
+
+  toggle.addEventListener('click', function() {
+    player.classList.toggle('hidden');
+    toggle.textContent = player.classList.contains('hidden') ? '♫ SHOW PLAYER' : '♫ HIDE PLAYER';
+  });
+
+  closeBtn.addEventListener('click', function() {
+    player.classList.add('hidden');
+    toggle.textContent = '♫ SHOW PLAYER';
+  });
+
+  trackSelect.addEventListener('change', function() {
+    const wasPlaying = !audio.paused;
+    audio.src = this.value;
+    audio.load();
+    nowPlaying.textContent = '♫ ' + trackSelect.options[trackSelect.selectedIndex].text;
+    if (wasPlaying) audio.play();
+  });
+});
+</script>
+
+</body>
+</html>
