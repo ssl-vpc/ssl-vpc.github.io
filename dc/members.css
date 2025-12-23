@@ -1,0 +1,69 @@
+/**
+ * Members list
+ */
+
+.members-3WRCEx,
+.container-2o3qEW {
+  background: var(--bg-secondary) !important;
+  border-left: 1px solid var(--border-primary) !important;
+}
+
+.membersGroup-2eiWxl,
+.container-q97qHp {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-secondary) !important;
+  margin: 8px !important;
+  padding: 6px 8px !important;
+  color: var(--text-primary) !important;
+  font-weight: bold !important;
+}
+
+.member-2gU6Ar,
+.container-1-ERn5 {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-secondary) !important;
+  margin: 2px 8px !important;
+}
+
+.member-2gU6Ar:hover,
+.container-1-ERn5:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-highlight) !important;
+}
+
+.nameAndDecorators-3ERwy2,
+.username-2b1r56 {
+  color: var(--text-secondary) !important;
+}
+
+.status-1fhq8w {
+  background: var(--bg-primary) !important;
+}
+
+.userPopoutOuter-3AVBmJ,
+.userPopout-2j1gM4 {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+}
+
+.userPopoutInner-3s14qa {
+  background: var(--bg-tertiary) !important;
+  border-bottom: 1px solid var(--border-accent) !important;
+}
+
+.root-8LYsGj,
+.userProfileOuter-2tSLUK {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+}
+
+.body-1Ukv50,
+.userProfileInner-1J5lDj {
+  background: var(--bg-secondary) !important;
+}
+
+.role-2TIOKu,
+.roleCircle-3TLkbw {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-accent) !important;
+}

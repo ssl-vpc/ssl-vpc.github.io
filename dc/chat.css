@@ -1,0 +1,95 @@
+/**
+ * Chat area & messages
+ */
+
+.chat-2ZfjoI,
+.chatContent-3KubbW {
+  background: var(--bg-secondary) !important;
+}
+
+.title-31SJ6t,
+.container-ZMc96U {
+  background: var(--bg-tertiary) !important;
+  border-bottom: 1px solid var(--border-accent) !important;
+  color: var(--text-primary) !important;
+  font-weight: bold !important;
+}
+
+.messagesWrapper-RpOMA3,
+.scroller-kQBbkU {
+  background: var(--bg-secondary) !important;
+}
+
+.message-2CShn3,
+.cozy-VmLDNB {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-secondary) !important;
+  margin: 4px 16px !important;
+  padding: 10px !important;
+}
+
+.message-2CShn3:hover,
+.cozy-VmLDNB:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-highlight) !important;
+}
+
+.messageContent-2t3eCI,
+.markup-eYLPri {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-main) !important;
+  font-size: 12px !important;
+  line-height: 1.6 !important;
+}
+
+.username-h_Y3Us,
+.headerText-2z4IhQ {
+  color: var(--text-primary) !important;
+  font-weight: bold !important;
+}
+
+.timestamp-p1Df1m,
+.timestampInline-_lS3aK {
+  color: var(--text-muted) !important;
+  font-size: 11px !important;
+}
+
+.markup-eYLPri code,
+.codeBlockSyntax-1Xn0Ot {
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--border-primary) !important;
+  color: var(--text-accent) !important;
+  font-family: var(--font-mono) !important;
+  padding: 10px !important;
+}
+
+.inlineCode-2ngu6Y {
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--border-primary) !important;
+  color: var(--text-accent) !important;
+  font-family: var(--font-mono) !important;
+}
+
+.embedWrapper-1MtIDg,
+.embed-hKpSrO {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-highlight) !important;
+  border-left: 3px solid var(--link-color) !important;
+}
+
+.systemMessage-1H1Z20 {
+  background: var(--bg-hover) !important;
+  border: 1px solid var(--border-highlight) !important;
+  padding: 10px !important;
+  color: var(--text-secondary) !important;
+}
+
+.divider-IqmEqJ,
+.divider-2rZFJK {
+  border-color: var(--border-primary) !important;
+}
+
+.newMessagesBar-1hF-9G {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-accent) !important;
+}

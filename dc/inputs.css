@@ -1,0 +1,110 @@
+/**
+ * Input fields, buttons & modals
+ */
+
+.form-3gdLxP,
+.channelTextArea-1FufC0 {
+  background: var(--bg-primary) !important;
+  border-top: 1px solid var(--border-primary) !important;
+  padding: 10px 16px !important;
+}
+
+.scrollableContainer-15eg7h,
+.textArea-12jD-V {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.scrollableContainer-15eg7h:focus-within,
+.textArea-12jD-V:focus-within {
+  border-color: var(--border-highlight) !important;
+}
+
+.slateTextArea-27tjG0,
+.editor-H2NA06 {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-main) !important;
+  font-size: 12px !important;
+}
+
+.placeholder-1rCBhr {
+  color: var(--text-muted) !important;
+}
+
+.button-f2h6uQ,
+.lookFilled-yCfaCM {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-accent) !important;
+  color: var(--text-primary) !important;
+}
+
+.button-f2h6uQ:hover,
+.lookFilled-yCfaCM:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-highlight) !important;
+}
+
+.colorBrand-2M3O3N {
+  background: var(--link-color) !important;
+  border: 1px solid var(--link-color) !important;
+}
+
+.colorBrand-2M3O3N:hover {
+  background: var(--link-hover) !important;
+}
+
+.searchBar-jGtisZ,
+.search-39IXmY {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.modal-3Hrb0S,
+.root-1CAIjD {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+}
+
+.header-1zd7se {
+  background: var(--bg-tertiary) !important;
+  border-bottom: 1px solid var(--border-accent) !important;
+  color: var(--text-primary) !important;
+  font-weight: bold !important;
+}
+
+.content-2hZxGK {
+  background: var(--bg-secondary) !important;
+  color: var(--text-secondary) !important;
+}
+
+.footer-31IekZ {
+  background: var(--bg-primary) !important;
+  border-top: 1px solid var(--border-primary) !important;
+}
+
+.menu-1QACrS,
+.scroller-1bVxF5 {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+}
+
+.item-1OdjEX {
+  color: var(--text-secondary) !important;
+}
+
+.item-1OdjEX:hover {
+  background: var(--bg-hover) !important;
+  color: var(--text-primary) !important;
+}
+
+.tooltip-14MtrL {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-highlight) !important;
+  color: var(--text-secondary) !important;
+}
+
+.notice-2HEN-u {
+  background: var(--bg-hover) !important;
+  border: 1px solid var(--border-highlight) !important;
+  color: var(--text-secondary) !important;
+}
