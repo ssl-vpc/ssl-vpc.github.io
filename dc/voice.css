@@ -1,0 +1,65 @@
+/**
+ * Voice & Video
+ */
+
+.wrapper-1gVUIN,
+.voiceContent-3rlBpS {
+  background: var(--bg-secondary) !important;
+}
+
+.tile-2naSqK {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.tile-2naSqK:hover {
+  border-color: var(--border-highlight) !important;
+}
+
+.callContainer-HtHELf {
+  background: var(--bg-primary) !important;
+}
+
+.videoWrapper-2v5vGm {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.controlButton-2PMNom {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-accent) !important;
+}
+
+.controlButton-2PMNom:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-highlight) !important;
+}
+
+.actionButtons-2vEOUh {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.voiceUser-1K6Xox {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-secondary) !important;
+  margin: 2px 0 !important;
+}
+
+.voiceUser-1K6Xox:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-highlight) !important;
+}
+
+.username-2Z3spn {
+  color: var(--text-secondary) !important;
+}
+
+.avatarSpeaking-3cLIGn {
+  box-shadow: 0 0 0 2px var(--text-accent) !important;
+}
+
+.rtcConnectionStatus-3FKXKQ {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-accent) !important;
+}

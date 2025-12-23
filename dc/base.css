@@ -1,0 +1,92 @@
+/**
+ * Base styles & variables
+ */
+
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-tertiary: #1a1a1a;
+  --bg-accent: #222222;
+  --bg-hover: #1e1e1e;
+  
+  --border-primary: #252525;
+  --border-secondary: #1f1f1f;
+  --border-accent: #333333;
+  --border-highlight: #404040;
+  
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #505050;
+  --text-accent: #7dd3a0;
+  
+  --link-color: #5b9cf6;
+  --link-hover: #7db4ff;
+  
+  --font-main: Verdana, Arial, sans-serif;
+  --font-mono: Consolas, Monaco, monospace;
+}
+
+/* Main app */
+.app-3xd6d0,
+.app-2CXKsg,
+.appMount-2yBXZl,
+.notAppAsidePanel-3yzkgB,
+.bg-1QIf36,
+.container-YkUktl,
+.layers-OrUESM,
+.layer-86YKbF {
+  background: var(--bg-primary) !important;
+}
+
+.container-1eFtFS,
+.base-2jDfDU,
+.content-1SgpWY {
+  background: var(--bg-primary) !important;
+}
+
+/* Remove all rounded corners */
+* {
+  border-radius: 0 !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-accent);
+  border: 1px solid var(--border-accent);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-highlight);
+}
+
+/* Links */
+.anchor-1MIwyf,
+.anchor-1X4H4q,
+a {
+  color: var(--link-color) !important;
+}
+
+.anchor-1MIwyf:hover,
+.anchor-1X4H4q:hover,
+a:hover {
+  color: var(--link-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* Remove Discord's default shadows */
+.elevation-1 *,
+.elevation-2 *,
+.elevation-3 *,
+.elevation-4 * {
+  box-shadow: none !important;
+}

@@ -1,0 +1,62 @@
+/**
+ * Threads & Forums
+ */
+
+.container-3XgAHv {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-primary) !important;
+}
+
+.mainCard-2EuX7Z {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.mainCard-2EuX7Z:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-highlight) !important;
+}
+
+.header-3PdMH2 {
+  background: var(--bg-tertiary) !important;
+  border-bottom: 1px solid var(--border-accent) !important;
+}
+
+.title-2dsDLn {
+  color: var(--text-primary) !important;
+  font-weight: bold !important;
+}
+
+.content-1jQy2l {
+  color: var(--text-secondary) !important;
+}
+
+.tag-1YGWBX {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-accent) !important;
+  color: var(--text-secondary) !important;
+}
+
+.pill-3N7f7V {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.newBadge-1s-fNg {
+  background: var(--link-color) !important;
+}
+
+.spine-3d0sPn {
+  background: var(--border-accent) !important;
+}
+
+.repliesButton-3R9NFx {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-secondary) !important;
+  color: var(--text-secondary) !important;
+}
+
+.repliesButton-3R9NFx:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-highlight) !important;
+}

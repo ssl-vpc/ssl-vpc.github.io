@@ -1,0 +1,139 @@
+/**
+ * Chat area & messages
+ */
+
+/* Main chat */
+.chat-2ZfjoI,
+.chatContent-3KubbW,
+.content-1SgpWY {
+  background: var(--bg-secondary) !important;
+}
+
+/* Chat header */
+.title-31SJ6t,
+.container-ZMc96U,
+.children-3xh0VB {
+  background: var(--bg-tertiary) !important;
+  border-bottom: 2px solid var(--border-accent) !important;
+}
+
+.title-31SJ6t {
+  color: var(--text-primary) !important;
+  font-weight: bold !important;
+  font-family: var(--font-main) !important;
+}
+
+/* Messages area */
+.messagesWrapper-RpOMA3,
+.scroller-kQBbkU,
+.scrollerContent-2SW0kQ {
+  background: var(--bg-secondary) !important;
+}
+
+/* Individual messages */
+.message-2CShn3,
+.cozy-VmLDNB,
+.groupStart-3Mlgv1 {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--border-secondary) !important;
+  margin: 6px 16px !important;
+  padding: 12px !important;
+}
+
+.message-2CShn3:hover,
+.cozy-VmLDNB:hover {
+  background: var(--bg-hover) !important;
+  border-color: var(--border-highlight) !important;
+}
+
+/* Message content */
+.messageContent-2t3eCI,
+.markup-eYLPri {
+  color: var(--text-secondary) !important;
+  font-family: var(--font-main) !important;
+  font-size: 12px !important;
+  line-height: 1.7 !important;
+}
+
+/* Username */
+.username-h_Y3Us,
+.headerText-2z4IhQ,
+.clickable-1bVtEA {
+  color: var(--text-primary) !important;
+  font-weight: bold !important;
+  font-family: var(--font-main) !important;
+}
+
+/* Timestamp */
+.timestamp-p1Df1m,
+.timestampInline-_lS3aK {
+  color: var(--text-muted) !important;
+  font-size: 10px !important;
+  font-family: var(--font-main) !important;
+}
+
+/* Code blocks */
+.markup-eYLPri code,
+.codeBlockSyntax-1Xn0Ot,
+.scrollbarGhostHairline-2LpzZ9 {
+  background: var(--bg-primary) !important;
+  border: 2px solid var(--border-primary) !important;
+  color: var(--text-accent) !important;
+  font-family: var(--font-mono) !important;
+  padding: 12px !important;
+}
+
+/* Inline code */
+.inlineCode-2ngu6Y,
+code.inline {
+  background: var(--bg-primary) !important;
+  border: 1px solid var(--border-primary) !important;
+  color: var(--text-accent) !important;
+  font-family: var(--font-mono) !important;
+  padding: 2px 6px !important;
+}
+
+/* Embeds */
+.embedWrapper-1MtIDg,
+.embed-hKpSrO,
+.wrapper-1HIH0j {
+  background: var(--bg-accent) !important;
+  border: 2px solid var(--border-highlight) !important;
+  border-left: 4px solid var(--link-color) !important;
+}
+
+/* Reactions */
+.reaction-3vwAF2 {
+  background: var(--bg-accent) !important;
+  border: 1px solid var(--border-secondary) !important;
+}
+
+.reaction-3vwAF2:hover {
+  border-color: var(--border-highlight) !important;
+}
+
+/* Dividers */
+.divider-IqmEqJ,
+.divider-2rZFJK,
+.isUnread-3Lojb- {
+  border-color: var(--border-accent) !important;
+}
+
+/* New messages bar */
+.newMessagesBar-1hF-9G,
+.jumpToPresentBar-G1R9s6 {
+  background: var(--bg-accent) !important;
+  border: 2px solid var(--border-accent) !important;
+}
+
+/* Mentioned messages */
+.mentioned-Tre-dv {
+  background: rgba(91, 156, 246, 0.1) !important;
+  border-left: 4px solid var(--link-color) !important;
+}
+
+/* Replying indicator */
+.replying-eZ7p5z {
+  background: rgba(91, 156, 246, 0.08) !important;
+  border-left: 4px solid var(--link-color) !important;
+}
