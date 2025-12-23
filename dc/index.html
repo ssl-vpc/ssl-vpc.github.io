@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discord Theme - egin.cc/dc</title>
+  <style>
+    body {
+      background: #0f0f0f;
+      font-family: Verdana, Arial, sans-serif;
+      color: #c0c0c0;
+      font-size: 12px;
+      margin: 0;
+      padding: 20px;
+    }
+    .wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #1c1c1c;
+      border: 1px solid #2c2c2c;
+      padding: 15px;
+    }
+    .header {
+      background: #202020;
+      border-bottom: 1px solid #2f2f2f;
+      padding: 10px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .notice {
+      border: 1px solid #444;
+      background: #2b2b2b;
+      padding: 10px;
+      margin-bottom: 20px;
+      color: #d0d0d0;
+    }
+    .code-box {
+      background: #181818;
+      border: 1px solid #333;
+      padding: 10px;
+      color: #9ae6b4;
+      font-family: monospace;
+      word-break: break-all;
+      white-space: pre-wrap;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .copy-btn {
+      background: #2c2c2c;
+      border: 1px solid #3a3a3a;
+      color: #fff;
+      padding: 8px 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .copy-btn:hover {
+      background: #3a3a3a;
+    }
+    .footer {
+      text-align: center;
+      color: #555;
+      margin-top: 30px;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="header">Discord Theme - egin.cc/dc</div>
+    
+    <div class="notice">
+      Copy the CSS below and paste it into your Discord client (BetterDiscord, Vencord, etc.)
+    </div>
+    
+    <div class="code-box" id="css-code">@import url('https://egin.cc/dc/base.css');
+@import url('https://egin.cc/dc/sidebar.css');
+@import url('https://egin.cc/dc/chat.css');
+@import url('https://egin.cc/dc/members.css');
+@import url('https://egin.cc/dc/inputs.css');</div>
+    
+    <button class="copy-btn" onclick="copyCSS()">Copy to Clipboard</button>
+    
+    <div class="footer">egin.cc</div>
+  </div>
+
+  <script>
+    function copyCSS() {
+      const code = document.getElementById('css-code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy to Clipboard', 2000);
+      });
+    }
+  </script>
+</body>
+</html>
