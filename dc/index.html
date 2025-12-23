@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark Form Theme - egin.cc</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#0f0f0f;font-family:Verdana,Arial,sans-serif;color:#c0c0c0;font-size:12px;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .card{width:100%;max-width:480px;background:#1c1c1c;border:1px solid #2c2c2c;overflow:hidden}
+    .card-header{background:linear-gradient(180deg,#252525 0%,#1c1c1c 100%);padding:24px;text-align:center;border-bottom:1px solid #2c2c2c}
+    .logo{width:56px;height:56px;background:#3b82f6;margin:0 auto 16px;display:flex;align-items:center;justify-content:center}
+    .logo svg{width:32px;height:32px;fill:#fff}
+    .card-header h1{color:#fff;font-size:18px;margin-bottom:4px}
+    .card-header span{color:#666;font-size:11px}
+    .card-body{padding:20px}
+    .label{color:#888;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+    .code-box{background:#0a0a0a;border:1px solid #252525;padding:14px;color:#9ae6b4;font-family:Consolas,Monaco,monospace;font-size:11px;line-height:1.7;white-space:pre;overflow-x:auto}
+    .btn{width:100%;background:#3b82f6;border:none;color:#fff;padding:12px;cursor:pointer;font-family:Verdana;font-size:12px;font-weight:bold;margin-top:16px;transition:background .15s}
+    .btn:hover{background:#2563eb}
+    .btn.copied{background:#22c55e}
+    .info{margin-top:20px;padding-top:16px;border-top:1px solid #252525}
+    .info-title{color:#fff;font-size:11px;margin-bottom:10px}
+    .steps{color:#888;font-size:11px;line-height:2}
+    .steps span{color:#3b82f6}
+    .card-footer{background:#151515;padding:14px;text-align:center;border-top:1px solid #252525}
+    .card-footer a{color:#3b82f6;text-decoration:none;font-size:11px}
+    .card-footer a:hover{text-decoration:underline}
+    .badge{display:inline-block;background:#252525;color:#9ae6b4;font-size:9px;padding:3px 8px;margin-left:8px;vertical-align:middle}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      <div class="logo">
+        <svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      </div>
+      <h1>Dark Form<span class="badge">v1.0</span></h1>
+      <span>Discord Theme by vpc | @2vpc</span>
+    </div>
+    <div class="card-body">
+      <div class="label">Import CSS</div>
+      <div class="code-box" id="css-display">@import url('https://egin.cc/dc/layout.css');</div>
+      <button class="btn" id="copy-btn" onclick="copyCSS()">Copy to Clipboard</button>
+      <div class="info">
+        <div class="info-title">How to use</div>
+        <div class="steps">
+          1. Install <span>BetterDiscord</span> or <span>Vencord</span><br>
+          2. Go to Themes → Open Themes Folder<br>
+          3. Create <span>darkforum.css</span> and paste<br>
+          4. Enable the theme
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <a href="https://egin.cc">egin.cc</a>
+    </div>
+  </div>
+  <script>
+    const fullCSS = `/**
+ * @name Dark Form
+ * @author vpc
+ * @version 1.0.0
+ * @description Dark form-inspired theme for Discord
+ * @source https://egin.cc/dc
+ * @discord @2vpc
+ * 
+ * ═══════════════════════════════════════════════════════
+ *   Dark Form Theme - Coded by vpc
+ *   Discord: @2vpc
+ *   Website: egin.cc/dc
+ * ═══════════════════════════════════════════════════════
+ * 
+ *   A clean, dark theme inspired by classic forum designs.
+ *   Smooth transitions, subtle accents, minimal clutter.
+ * 
+ *   Features:
+ *   - Deep dark color scheme
+ *   - Green accent highlights
+ *   - Smooth hover animations
+ *   - Clean rounded corners
+ *   - Custom scrollbars
+ *   - Speaking indicator glow
+ * 
+ * ═══════════════════════════════════════════════════════
+ */
+
+@import url('https://egin.cc/dc/layout.css');`;
+
+    function copyCSS(){
+      navigator.clipboard.writeText(fullCSS).then(()=>{
+        const btn=document.getElementById('copy-btn');
+        btn.textContent='Copied!';
+        btn.classList.add('copied');
+        setTimeout(()=>{btn.textContent='Copy to Clipboard';btn.classList.remove('copied')},2000);
+      });
+    }
+  </script>
+</body>
+</html>
