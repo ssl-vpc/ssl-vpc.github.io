@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vpc</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="entry-screen" id="entryScreen">
+        <div class="entry-content">
+            <span class="click-text">Click to Enter</span>
+        </div>
+    </div>
+
+    <video id="videoBg" muted loop playsinline preload="auto" class="video-bg">
+        <source src="media/video.mp4" type="video/mp4">
+    </video>
+    
+    <audio id="bgAudio" loop preload="auto">
+        <source src="media/audio.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="container" id="mainContent">
+        <div class="card">
+            <div class="card-top">
+                <div class="pfp-wrapper">
+                    <img src="media/icon.jpg" alt="Profile" class="pfp">
+                </div>
+            </div>
+            
+            <div class="card-info">
+                <h1 class="username"><span id="typewriter"></span><span class="cursor">|</span></h1>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="socials">
+                <a href="https://t.me/vylenc" target="_blank" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="dots">
+        <div class="dot active" data-index="1"></div>
+        <div class="dot" data-index="2"></div>
+    </div>
+    
+    <script>
+        const entryScreen = document.getElementById('entryScreen');
+        const video = document.getElementById('videoBg');
+        const audio = document.getElementById('bgAudio');
+        const mainContent = document.getElementById('mainContent');
+        const card = document.querySelector('.card');
+
+        mainContent.style.opacity = '0';
+
+        entryScreen.addEventListener('click', function() {
+            entryScreen.classList.add('fade-out');
+            video.play();
+            audio.play();
+            
+            setTimeout(function() {
+                mainContent.style.opacity = '1';
+                entryScreen.style.display = 'none';
+                type();
+            }, 500);
+        });
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0) rotateY(0)';
+        });
+
+        var textToType = 'vpc';
+        var typewriterEl = document.getElementById('typewriter');
+        var idx = 0;
+
+        function type() {
+            if (idx < textToType.length) {
+                typewriterEl.innerHTML += textToType.charAt(idx);
+                idx++;
+                setTimeout(type, 150);
+            }
+        }
+
+        var dots = document.querySelectorAll('.dot');
+        dots.forEach(function(dot) {
+            dot.addEventListener('click', function() {
+                var index = this.getAttribute('data-index');
+                
+                dots.forEach(function(d) { d.classList.remove('active'); });
+                this.classList.add('active');
+                
+                if (index === '1') {
+                    video.src = 'media/video.mp4';
+                    audio.src = 'media/audio.mp3';
+                } else {
+                    video.src = 'media/video2.mp4';
+                    audio.src = 'media/audio2.mp3';
+                }
+                
+                video.load();
+                video.play();
+                audio.load();
+                audio.play();
+            });
+        });
+    </script>
+</body>
+</html>
