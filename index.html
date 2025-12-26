@@ -18,6 +18,11 @@
 <body>
     <div class="rain" id="rain"></div>
     <div class="copy-tooltip" id="copyTooltip">Copied!</div>
+    <div class="entry-screen" id="entryScreen">
+        <div class="entry-content">
+            <span class="click-text">Click to Enter</span>
+        </div>
+    </div>
 
     <audio id="bgAudio" loop preload="auto">
         <source src="media/audio.mp3" type="audio/mpeg">
@@ -60,12 +65,19 @@
     </div>
     
     <script>
+        const entryScreen = document.getElementById('entryScreen');
         const audio = document.getElementById('bgAudio');
         const mainContent = document.getElementById('mainContent');
         const card = document.querySelector('.card');
 
-        audio.play();
-        fetchDiscord();
+        mainContent.style.opacity = '0';
+
+        entryScreen.addEventListener('click', function() {
+            entryScreen.style.display = 'none';
+            mainContent.style.opacity = '1';
+            audio.play();
+            fetchDiscord();
+        });
 
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
