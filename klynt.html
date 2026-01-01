@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>klynt</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.cdnfonts.com/css/vcr-osd-mono" rel="stylesheet">
+</head>
+<body class="profile-page" oncontextmenu="return false;">
+    <div id="snow"></div>
+    <div class="bg-effect" style="background-image: url('media/klynt-bg.jpg'); opacity: 0.5;"></div>
+
+    <a href="index.html" class="back-btn">← Back</a>
+
+    <div class="profile-container">
+        <div class="window-titlebar">
+            <span class="window-title">Profile</span>
+            <span class="window-close">×</span>
+        </div>
+        <img src="media/klynt.jpg" alt="Avatar" class="profile-avatar">
+        <div class="profile-title">klynt</div>
+        <div class="socials-divider">--Socials--</div>
+        <div class="socials-row">
+            <a href="https://t.me/" target="_blank" class="social-icon">
+                <img src="media/telegram.png" alt="Telegram">
+            </a>
+        </div>
+    </div>
+
+    <audio id="bgAudio" preload="auto"></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Rain particles - no interactivity
+        particlesJS("snow", {
+            particles: {
+                number: { value: 200, density: { enable: true, value_area: 800 }},
+                color: { value: "#ffffff" },
+                opacity: { value: 0.5, random: true },
+                size: { value: 1.5, random: false },
+                line_linked: { enable: false },
+                move: {
+                    enable: true,
+                    speed: 15,
+                    direction: "bottom",
+                    random: false,
+                    straight: true,
+                    out_mode: "out"
+                },
+                shape: { type: "circle" }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: false },
+                    onclick: { enable: false },
+                    resize: true
+                }
+            },
+            retina_detect: true
+        });
+
+        // Continue music from main page
+        const audio = document.getElementById('bgAudio');
+        let currentTrack = parseInt(localStorage.getItem('currentTrack')) || 1;
+        let savedTime = parseFloat(localStorage.getItem('audioTime')) || 0;
+
+        audio.src = 'media/song' + currentTrack + '.mp3';
+        audio.currentTime = savedTime;
+        audio.play();
+
+        setInterval(() => {
+            localStorage.setItem('audioTime', audio.currentTime);
+        }, 1000);
+
+        audio.addEventListener('ended', () => {
+            currentTrack = currentTrack >= 4 ? 1 : currentTrack + 1;
+            audio.src = 'media/song' + currentTrack + '.mp3';
+            audio.play();
+            localStorage.setItem('currentTrack', currentTrack);
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'I') e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && e.key === 'J') e.preventDefault();
+            if (e.ctrlKey && e.key === 'u') e.preventDefault();
+            if (e.key === 'F12') e.preventDefault();
+        });
+    </script>
+</body>
+</html>
