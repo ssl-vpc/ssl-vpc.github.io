@@ -1,1 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bruisedrockstar</title>
+    
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="bruisedrockstar">
+    <meta property="og:description" content="bruisedrockstar's profile">
+    
+    <meta name="theme-color" content="#000000">
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="rain" id="rain"></div>
+    <div class="entry-screen" id="entryScreen">
+        <div class="entry-content">
+            <span class="click-text">Click to Enter</span>
+        </div>
+    </div>
 
+    <audio id="bgAudio" loop preload="auto">
+        <source src="media/audio.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="container" id="mainContent">
+        <div class="card">
+            <div class="card-top">
+                <div class="pfp-wrapper">
+                    <img src="" alt="Profile" class="pfp" id="avatar">
+                    <div class="status-indicator" id="statusIndicator"></div>
+                </div>
+            </div>
+            
+            <div class="card-info">
+                <div class="name-badges">
+                    <h1 class="username"><span id="typewriter"></span><span class="cursor">|</span></h1>
+                    <div class="badges" id="badges"></div>
+                </div>
+                <p class="discord-status" id="discordStatus"></p>
+            </div>
+            
+            <div class="activity-section" id="activitySection" style="display: none;">
+                <div class="divider"></div>
+                <div class="activity">
+                    <img class="activity-image" id="activityImage" src="" alt="">
+                    <div class="activity-info">
+                        <span class="activity-type" id="activityType"></span>
+                        <span class="activity-name" id="activityName"></span>
+                        <span class="activity-details" id="activityDetails"></span>
+                        <span class="activity-state" id="activityState"></span>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    <script>
+        const DISCORD_ID = '1457473109828309064';
+        const entryScreen = document.getElementById('entryScreen');
+        const audio = document.getElementById('bgAudio');
+        const mainContent = document.getElementById('mainContent');
+        const card = document.querySelector('.card');
+
+        mainContent.style.opacity = '0';
+
+        entryScreen.addEventListener('click', function() {
+            entryScreen.classList.add('fade-out');
+            audio.play();
+            
+            setTimeout(function() {
+                mainContent.style.opacity = '1';
+                entryScreen.style.display = 'none';
+            }, 500);
+        });
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = (y - centerY) / 20;
+            const rotateY = (centerX - x) / 20;
+            
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0) rotateY(0)';
+        });
+
+        var textToType = '';
+        var typewriterEl = document.getElementById('typewriter');
+        var idx = 0;
+        var isDeleting = false;
+        var typewriterStarted = false;
+
+        function type() {
+            if (!textToType) return;
+            
+            if (!isDeleting) {
+                if (idx < textToType.length) {
+                    typewriterEl.innerHTML += textToType.charAt(idx);
+                    idx++;
+                    setTimeout(type, 150);
+                } else {
+                    isDeleting = true;
+                    setTimeout(type, 1500);
+                }
+            } else {
+                if (idx > 0) {
+                    typewriterEl.innerHTML = textToType.substring(0, idx - 1);
+                    idx--;
+                    setTimeout(type, 100);
+                } else {
+                    isDeleting = false;
+                    setTimeout(type, 500);
+                }
+            }
+        }
+
+        function startTypewriter(name) {
+            if (typewriterStarted) return;
+            textToType = name;
+            typewriterStarted = true;
+            type();
+        }
+
+        const rain = document.getElementById('rain');
+        function createDrop() {
+            const drop = document.createElement('div');
+            drop.className = 'drop';
+            drop.style.left = Math.random() * 100 + '%';
+            drop.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+            drop.style.opacity = Math.random() * 0.3 + 0.2;
+            rain.appendChild(drop);
+            setTimeout(() => drop.remove(), 1500);
+        }
+        setInterval(createDrop, 20);
+
+        const statusColors = {
+            online: '#3ba55c',
+            idle: '#faa61a',
+            dnd: '#ed4245',
+            offline: '#747f8d'
+        };
+
+        function connectLanyard() {
+            const ws = new WebSocket('wss://api.lanyard.rest/socket');
+            
+            ws.onopen = () => {
+                console.log('Connected to Lanyard');
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                
+                if (data.op === 1) {
+                    ws.send(JSON.stringify({
+                        op: 2,
+                        d: { subscribe_to_id: DISCORD_ID }
+                    }));
+
+                    setInterval(() => {
+                        ws.send(JSON.stringify({ op: 3 }));
+                    }, data.d.heartbeat_interval);
+                }
+                
+                if (data.op === 0) {
+                    if (data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE') {
+                        updatePresence(data.d);
+                    }
+                }
+            };
+
+            ws.onclose = () => {
+                console.log('Disconnected from Lanyard, reconnecting...');
+                setTimeout(connectLanyard, 5000);
+            };
+
+            ws.onerror = (error) => {
+                console.error('Lanyard WebSocket error:', error);
+            };
+        }
+
+        function updatePresence(data) {
+            const statusIndicator = document.getElementById('statusIndicator');
+            const discordStatus = document.getElementById('discordStatus');
+            const activitySection = document.getElementById('activitySection');
+            const avatar = document.getElementById('avatar');
+            const badgesContainer = document.getElementById('badges');
+
+            if (data.discord_user) {
+                const displayName = data.discord_user.global_name || data.discord_user.username;
+                startTypewriter(displayName);
+
+                const flags = data.discord_user.public_flags || 0;
+                const badges = [];
+
+                const badgeFlags = {
+                    1: { name: 'Discord Staff', icon: 'https://cdn.discordapp.com/badge-icons/5e74e9b61934fc1f67c65515d1f7e60d.png' },
+                    2: { name: 'Partnered Server Owner', icon: 'https://cdn.discordapp.com/badge-icons/3f9748e53446a137a052f3571e4b8c04.png' },
+                    4: { name: 'HypeSquad Events', icon: 'https://cdn.discordapp.com/badge-icons/bf01d1073931f921909045f3a39fd264.png' },
+                    8: { name: 'Bug Hunter Level 1', icon: 'https://cdn.discordapp.com/badge-icons/2717692c7dca7289b35297368a940dd0.png' },
+                    64: { name: 'HypeSquad Bravery', icon: 'https://cdn.discordapp.com/badge-icons/8a88d63823d8a71cd5e390baa45efa02.png' },
+                    128: { name: 'HypeSquad Brilliance', icon: 'https://cdn.discordapp.com/badge-icons/011940fd013da3f7fb926e4a1cd2e618.png' },
+                    256: { name: 'HypeSquad Balance', icon: 'https://cdn.discordapp.com/badge-icons/3aa41de486fa12454c3761e8e223442e.png' },
+                    512: { name: 'Early Supporter', icon: 'https://cdn.discordapp.com/badge-icons/7060786766c9c840eb3019e725d2b358.png' },
+                    16384: { name: 'Bug Hunter Level 2', icon: 'https://cdn.discordapp.com/badge-icons/848f79194d4be5ff5f81505cbd0ce1e6.png' },
+                    131072: { name: 'Verified Bot Developer', icon: 'https://cdn.discordapp.com/badge-icons/6df5892e0f35b051f8b61571f2a04f96.png' },
+                    262144: { name: 'Discord Certified Moderator', icon: 'https://cdn.discordapp.com/badge-icons/fee1624003e2fee35cb398e125dc479b.png' },
+                    4194304: { name: 'Active Developer', icon: 'https://cdn.discordapp.com/badge-icons/6bdc42827a38498929a4920da12695d9.png' }
+                };
+
+                for (const [flag, badge] of Object.entries(badgeFlags)) {
+                    if (flags & parseInt(flag)) {
+                        badges.push(badge);
+                    }
+                }
+
+                badges.unshift({ name: 'Nitro', icon: 'https://cdn.discordapp.com/badge-icons/2ba85e8026a8614b640c2837bcdfe21b.png' });
+
+                badgesContainer.innerHTML = badges.map(b => 
+                    `<img class="badge" src="${b.icon}" alt="${b.name}" title="${b.name}">`
+                ).join('');
+            }
+
+            if (data.discord_user && data.discord_user.avatar) {
+                const avatarUrl = `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${data.discord_user.avatar}.${data.discord_user.avatar.startsWith('a_') ? 'gif' : 'webp'}?size=256`;
+                avatar.src = avatarUrl;
+            }
+
+            const status = data.discord_status || 'offline';
+            statusIndicator.style.backgroundColor = statusColors[status];
+            statusIndicator.className = 'status-indicator ' + status;
+
+            const customStatus = data.activities?.find(a => a.type === 4);
+            if (customStatus) {
+                let statusText = '';
+                if (customStatus.emoji) {
+                    if (customStatus.emoji.id) {
+                        statusText += `<img class="status-emoji" src="https://cdn.discordapp.com/emojis/${customStatus.emoji.id}.${customStatus.emoji.animated ? 'gif' : 'webp'}?size=20" alt="">`;
+                    } else {
+                        statusText += customStatus.emoji.name + ' ';
+                    }
+                }
+                if (customStatus.state) {
+                    statusText += customStatus.state;
+                }
+                discordStatus.innerHTML = statusText;
+            } else {
+                discordStatus.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+            }
+
+            const activity = data.activities?.find(a => a.type !== 4);
+            if (activity) {
+                activitySection.style.display = 'block';
+                
+                const activityType = document.getElementById('activityType');
+                const activityName = document.getElementById('activityName');
+                const activityDetails = document.getElementById('activityDetails');
+                const activityState = document.getElementById('activityState');
+                const activityImage = document.getElementById('activityImage');
+
+                const typeLabels = {
+                    0: 'Playing',
+                    1: 'Streaming',
+                    2: 'Listening to',
+                    3: 'Watching',
+                    5: 'Competing in'
+                };
+
+                activityType.textContent = typeLabels[activity.type] || 'Playing';
+                activityName.textContent = activity.name;
+                activityDetails.textContent = activity.details || '';
+                activityState.textContent = activity.state || '';
+
+                if (data.spotify && activity.name === 'Spotify') {
+                    activityImage.src = data.spotify.album_art_url;
+                    activityImage.style.display = 'block';
+                    activityType.textContent = 'Listening to';
+                    activityName.textContent = data.spotify.song;
+                    activityDetails.textContent = 'by ' + data.spotify.artist;
+                    activityState.textContent = 'on ' + data.spotify.album;
+                } else if (activity.assets?.large_image) {
+                    let imageUrl = activity.assets.large_image;
+                    if (imageUrl.startsWith('mp:external/')) {
+                        imageUrl = `https://media.discordapp.net/external/${imageUrl.replace('mp:external/', '')}`;
+                    } else if (!imageUrl.startsWith('http')) {
+                        imageUrl = `https://cdn.discordapp.com/app-assets/${activity.application_id}/${imageUrl}.webp`;
+                    }
+                    activityImage.src = imageUrl;
+                    activityImage.style.display = 'block';
+                } else {
+                    activityImage.style.display = 'none';
+                }
+            } else {
+                activitySection.style.display = 'none';
+            }
+        }
+
+        connectLanyard();
+    </script>
+</body>
+</html>
